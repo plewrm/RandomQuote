@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const  CreateData=()=> {
+const  CreateQuote=()=> {
   const [quotes, setQuotes] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
@@ -9,7 +9,9 @@ const  CreateData=()=> {
     fetch("https://api.adviceslip.com/advice")
       .then((response) => response.json())
       .then((data) => {
-        setQuotes((prevQuotes) => [...prevQuotes, data.slip.advice]);//creates a new array by taking all the elements from the previous state (prevQuotes) and adding a new element (data.slip.advice) to the end of the array.
+        setQuotes((prevQuotes) => [...prevQuotes, data.slip.advice]);
+        //creates a new array by taking all the elements from the previous state (prevQuotes) 
+        // and adding a new element (data.slip.advice) to the end of the array.
         setRequestCount((prevCount) => prevCount + 1);
       });
   };
@@ -26,7 +28,8 @@ const  CreateData=()=> {
         } else {
           // After the first 10 calls, double the interval every 5 calls
           const extraCalls = requestCount - 10;
-          interval = Math.min(120000, 20000 * Math.pow(2, Math.floor(extraCalls / 5)));//function is used to ensure the maximum interval is not greater than 2 minutes (120 seconds)
+          interval = Math.min(120000, 20000 * Math.pow(2, Math.floor(extraCalls / 5)));
+          //function is used to ensure the maximum interval is not greater than 2 minutes (120 seconds)
         }
 
         timer = setInterval(fetchQuote, interval);
@@ -52,7 +55,7 @@ const  CreateData=()=> {
   );
 }
 
-export default CreateData;
+export default CreateQuote;
 
 
 // import React from "react";

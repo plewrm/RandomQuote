@@ -1,18 +1,6 @@
-// import React from "react";
-// import DataCreate from './DataCreate'
-// const CreateData =()=>{
-// return(
-//     <div>
-//         <h2>Demo Create</h2>
-//         {/* <DataCreate/> */}
-//     </div>
-// )
-// }
-// export default CreateData;
-
 import React, { useState, useEffect } from "react";
 
-function CreateData() {
+const  CreateData=()=> {
   const [quotes, setQuotes] = useState([]);
   const [requestCount, setRequestCount] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
@@ -21,7 +9,7 @@ function CreateData() {
     fetch("https://api.adviceslip.com/advice")
       .then((response) => response.json())
       .then((data) => {
-        setQuotes((prevQuotes) => [...prevQuotes, data.slip.advice]);
+        setQuotes((prevQuotes) => [...prevQuotes, data.slip.advice]);//creates a new array by taking all the elements from the previous state (prevQuotes) and adding a new element (data.slip.advice) to the end of the array.
         setRequestCount((prevCount) => prevCount + 1);
       });
   };
@@ -30,8 +18,7 @@ function CreateData() {
     let timer;
     if (isRunning) {
       if (requestCount < 25) {
-        // Determine the interval based on the request count
-        let interval;
+        let interval;// The interval is determined based on the request Count
         if (requestCount < 5) {
           interval = 5000; // 5 seconds for the first 5 calls
         } else if (requestCount < 10) {
@@ -39,7 +26,7 @@ function CreateData() {
         } else {
           // After the first 10 calls, double the interval every 5 calls
           const extraCalls = requestCount - 10;
-          interval = Math.min(120000, 20000 * Math.pow(2, Math.floor(extraCalls / 5)));
+          interval = Math.min(120000, 20000 * Math.pow(2, Math.floor(extraCalls / 5)));//function is used to ensure the maximum interval is not greater than 2 minutes (120 seconds)
         }
 
         timer = setInterval(fetchQuote, interval);
@@ -66,3 +53,16 @@ function CreateData() {
 }
 
 export default CreateData;
+
+
+// import React from "react";
+// import DataCreate from './DataCreate'
+// const CreateData =()=>{
+// return(
+//     <div>
+//         <h2>Demo Create</h2>
+//         {/* <DataCreate/> */}
+//     </div>
+// )
+// }
+// export default CreateData;
